@@ -1,0 +1,52 @@
+#define triggerpin 7
+#include <FastLED.h>
+#define NUM_LEDS 60
+#define LED_PIN 1
+CRGB leds[NUM_LEDS];
+
+
+#define echoPin 8
+
+void setup()
+
+{ FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+ 
+  Serial.begin (9600);
+
+  pinMode(triggerpin, OUTPUT);
+
+  pinMode(echoPin, INPUT);
+
+  pinMode(13, OUTPUT);
+  digitalWrite(13,LOW);
+
+}
+
+void loop()
+
+{ 
+  digitalWrite(triggerpin,LOW);
+  delayMicroseconds(2);
+   
+  digitalWrite(triggerpin,HIGH);
+  delayMicroseconds(10);
+   
+  digitalWrite(triggerpin,LOW);
+  float duration;
+  duration = pulseIn(echoPin, HIGH);
+  float distance;
+  distance=duration*340/20000;
+  Serial.println(distance);
+  //digitalWrite(13,LOW);
+  if( distance<=75.00)
+  {
+    digitalWrite(13,HIGH);
+    for(int i=0;i<60;i++)
+   {leds[i]=CRGB(0,0,255);
+   FastLED.show();}
+     
+  }
+ 
+
+
+}
