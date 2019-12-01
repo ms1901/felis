@@ -1,0 +1,104 @@
+#include <FastLED.h>
+
+#define NUM_LEDS1 3
+#define LED_PIN1 0
+
+#define NUM_LEDS2 3
+#define LED_PIN2 1
+
+#define NUM_LEDS3 3
+#define LED_PIN3 2
+
+#define NUM_LEDS4 3
+#define LED_PIN4 3
+
+#define NUM_LEDS5 3
+#define LED_PIN5 4
+
+int p;
+int r[4]={209,230,226,140};
+int g[4]={178,121,66,26};
+int l[4]={26,93,26,226};
+
+CRGB leds1[NUM_LEDS1];
+CRGB leds2[NUM_LEDS2];
+CRGB leds3[NUM_LEDS3];
+CRGB leds4[NUM_LEDS4];
+CRGB leds5[NUM_LEDS5];
+
+
+
+void setup()
+{
+Serial.begin(9600);
+
+ pinMode(5,INPUT);
+ pinMode(6,INPUT);
+ pinMode(7,INPUT);
+ pinMode(8,INPUT);
+ pinMode(9,INPUT);
+
+ 
+ 
+ Serial.begin(9600);
+    
+ FastLED.addLeds<WS2812, LED_PIN1, GRB>(leds1, NUM_LEDS1);
+ FastLED.addLeds<WS2812, LED_PIN2, GRB>(leds2, NUM_LEDS2);
+ FastLED.addLeds<WS2812, LED_PIN3, GRB>(leds3, NUM_LEDS3);
+ FastLED.addLeds<WS2812, LED_PIN4, GRB>(leds4, NUM_LEDS4);
+ FastLED.addLeds<WS2812, LED_PIN5, GRB>(leds5, NUM_LEDS5);
+ 
+}
+
+
+void loop()
+{ 
+  
+  if ( digitalRead(5) == 0 ) 
+  {   p=random(5);
+      leds1[0] = CRGB(r[p],g[p],l[p]);
+      
+      FastLED.show();
+      delay(1000);
+
+      
+  }
+ if ( digitalRead(6) == 0) 
+  { p=random(5);
+      leds2[0] = CRGB(r[p],g[p],l[p]);
+      FastLED.show();
+     
+      delay(1000);
+      
+  }
+  if ( digitalRead(7) == 0 ) 
+  { p=random(5);
+      leds3[0] = CRGB(r[p],g[p],l[p]);
+      FastLED.show();
+      
+      delay(1000);
+      
+  }
+  if ( digitalRead(8) == 0 ) 
+  { p=random(5);
+      leds4[0] = CRGB(r[p],g[p],l[p]);
+      FastLED.show();
+      
+      delay(1000);
+     
+  }
+ 
+    
+  
+  if ( digitalRead(9) == 0 ) 
+  { p=random(5);
+      leds5[0] =  CRGB(r[p],g[p],l[p]);
+      FastLED.show();
+      
+      delay(1000);
+     
+  }
+  
+
+  
+}
